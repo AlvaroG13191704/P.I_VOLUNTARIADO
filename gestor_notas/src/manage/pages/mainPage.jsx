@@ -28,7 +28,7 @@ export const MainPage = () => {
     dispatch( addMainAttributes({
       ...inputs,
       id: uuid(),
-    }) )
+    }))
     setInputs({
       profesora:'',
       grado:'',
