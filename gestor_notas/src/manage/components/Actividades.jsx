@@ -23,7 +23,7 @@ export const Actividades = ({values}) => {
                         actividades.map( (actividad,i) => (
                             (actividad === '')
                             ?<></>
-                            :<Typography variant='h6' sx={{p:2}} key={actividad} >Actividad {i+1}: {actividad}</Typography>
+                            :<Typography variant='h6' sx={{p:2}} key={i} >Actividad {i+1}: {actividad}</Typography>
                         ))
                     }
                 </Grid>

@@ -64,7 +64,7 @@ export const materias_2 = [
         'value':[]
     },
     {
-        'materia':'roductividad y desarrollo',
+        'materia':'Productividad y desarrollo',
         'value':[]
     },
 ]

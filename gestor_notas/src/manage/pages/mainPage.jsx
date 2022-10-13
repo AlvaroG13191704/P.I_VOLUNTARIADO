@@ -1,19 +1,29 @@
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addMainAttributes } from '../../features/course/courseSlice';
+import { addMainAttributes, onLoad } from '../../features/course/courseSlice';
 import { SeccionCard } from '../../mainComponents/SeccionCard';
 import { v4 as uuid } from 'uuid';
+import { loadState } from '../../app/localStorage';
 
 export const MainPage = () => {
   // hooks
   const dispatch = useDispatch();
-  const seccion_created = useSelector(state => state.course);
+
+  const seccionCreada = useSelector(state => state.course);
+
+
   const [inputs, setInputs] = useState({
     profesora:'',
     grado:'',
     seccion:''
   });
+
+  useEffect(() => {
+    dispatch( onLoad() )
+  }, [])
+  
+  
 
   const handleChange = (e) => {
     setInputs((preventState) => ({
@@ -51,9 +61,9 @@ export const MainPage = () => {
 
       <Grid item xs={12} sx={{mt:2}} >
         {
-          (seccion_created.profesora == '')
+          (seccionCreada.profesora === '')
           ?<></>
-          :<SeccionCard inputs={seccion_created} />
+          :<SeccionCard inputs={seccionCreada} />
         }
       </Grid>
 
@@ -109,7 +119,7 @@ export const MainPage = () => {
               </Select>
             </FormControl>
             <Grid item xs={12}  sm={12} sx={{mt:2}}>
-              <Button variant='contained' fullWidth type='submit' >
+              <Button variant='contained' fullWidth type='submit'  >
                 Agregar sección 
               </Button>
             </Grid>

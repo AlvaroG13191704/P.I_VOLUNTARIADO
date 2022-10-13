@@ -1,6 +1,9 @@
 import { AddOutlined } from '@mui/icons-material';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { onLoad } from '../../features/course/courseSlice';
 import { MainInformation } from '../components/MainInformation';
 import { MateriasInformation } from '../components/MateriasInformation';
 
@@ -9,7 +12,25 @@ import { MateriasInformation } from '../components/MateriasInformation';
 export const SeccionPage = () => {
 
   // hooks
+  const dispatch = useDispatch();
+  
   const seccionCompleta = useSelector(state => state.course);
+
+  useEffect(() => {
+    console.log('Cargando')
+    dispatch( onLoad() )
+  }, [])
+
+  
+  console.log(seccionCompleta)
+
+  const navigate = useNavigate();
+
+
+
+  const handleForm = () => {
+    navigate('/seccion/form')
+  }
 
   
   return (
@@ -62,8 +83,9 @@ export const SeccionPage = () => {
           right:50,
           bottom: 50,
         }}
+        onClick={handleForm}
       >
-        <AddOutlined sx={{ fontSize:70 }} />
+        <AddOutlined sx={{ fontSize:70 }}/>
       </IconButton>
     </Box>
   )

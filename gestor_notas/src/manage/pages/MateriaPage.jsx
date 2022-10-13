@@ -1,20 +1,32 @@
 
 import { Box, Button, Divider, Grid, Tooltip, Typography } from '@mui/material';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { ActividadesForm } from '../components/ActividadesForm';
 import { Actividades } from '../components/Actividades';
+import { onLoad } from '../../features/course/courseSlice';
 export const MateriaPage = () => {
 
     // hook
+    const dispatch = useDispatch();
+    //const [materia, setMateria] = useState(null);
+    useEffect(() => {
+        dispatch( onLoad() )
+    }, [])
+    
     const {name} = useParams();
+
     const {materias} = useSelector(state => state.course);
 
-    const materia = materias.find(m => m.materia === name )
+    const valores = materias.find(m => m.materia === name )
+
+    const {materia, value} = valores
     
-    console.log(materia)
+    
+    
+    
 
 
   return (
@@ -35,7 +47,7 @@ export const MateriaPage = () => {
                     alignItems="center"
                 >
                     <Grid item xs = {12} sx={{mb:2}}>
-                        <Typography variant='h2' sx={{p:0.5}} >{materia.materia}</Typography>
+                        <Typography variant='h2' sx={{p:0.5}} >{materia}</Typography>
                         
                         <Grid container sx={{mt:1.3}}>
                         <Grid item container justifyContent="space-evenly" >
@@ -63,10 +75,10 @@ export const MateriaPage = () => {
             <Grid item xs={6}>
                 <Typography variant='h2' sx={{p:0.5}} >Actividades creadas</Typography>
                 <Divider />
-                <Actividades values={materia.value} />
+                <Actividades values={value} />
             </Grid>
             <Grid item xs={4}>
-                <ActividadesForm materia={materia.materia} />
+                <ActividadesForm materia={materia} />
             </Grid>
             <Grid item xs={6}>
                 4

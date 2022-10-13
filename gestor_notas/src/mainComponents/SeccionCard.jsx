@@ -10,7 +10,7 @@ export const SeccionCard = ({inputs}) => {
                 Sección: {inputs.seccion}
             </Typography>
             <Typography variant="h5" component="div">
-                Grado: {inputs.grado} Básico
+                Grado: {inputs.grado} Primaria
             </Typography>
             <Typography variant="h6">
                 Profesora: {inputs.profesora}
