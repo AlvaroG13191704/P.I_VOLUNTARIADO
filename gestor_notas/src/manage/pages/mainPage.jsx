@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMainAttributes, onLoad } from '../../features/course/courseSlice';
 import { SeccionCard } from '../../mainComponents/SeccionCard';
 import { v4 as uuid } from 'uuid';
-import { loadState } from '../../app/localStorage';
 
 export const MainPage = () => {
   // hooks

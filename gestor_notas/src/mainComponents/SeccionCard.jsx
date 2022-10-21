@@ -3,6 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const SeccionCard = ({inputs}) => {
+
+    
   return (
     <Card sx={{minWidth:275,mb:2}} >
         <CardContent>

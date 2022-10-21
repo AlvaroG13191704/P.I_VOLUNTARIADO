@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { onLoad } from '../../features/course/courseSlice';
+import { Alumno } from '../components/Alumno';
 import { MainInformation } from '../components/MainInformation';
 import { MateriasInformation } from '../components/MateriasInformation';
+import { TopBar } from '../layout/TopBar';
 
 
 
@@ -13,20 +15,14 @@ export const SeccionPage = () => {
 
   // hooks
   const dispatch = useDispatch();
-  
-  const seccionCompleta = useSelector(state => state.course);
 
   useEffect(() => {
-    console.log('Cargando')
     dispatch( onLoad() )
   }, [])
 
-  
-  console.log(seccionCompleta)
-
+  const seccionCompleta = useSelector(state => state.course);
+ 
   const navigate = useNavigate();
-
-
 
   const handleForm = () => {
     navigate('/seccion/form')
@@ -35,42 +31,42 @@ export const SeccionPage = () => {
   
   return (
     <Box sx={{ width: '100%', p:3}}>
+      <TopBar />
       <Grid 
         container
         direction="row"
-        justifyContent="center"
-        alignItems="center"
+        justifyContent="flex-start"
+        alignItems="flex-start"
         rowSpacing={1} 
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        sx={{mt:4}}
+        >
         <Grid item xs={6}>
           <MainInformation seccionCompleta={seccionCompleta}/>
         </Grid>
         <Grid item xs={6}>
           <Grid
           container
-          direction="column"
+          direction="row"
           justifyContent="flex-start"
           alignItems="flex-start"
           >
-          <Grid item xs = {12} container  direction="column">
+          <Grid item xs = {12}>
               <Typography variant='h3'>Listado de Alumnos</Typography>
           </Grid>
         </Grid>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <MateriasInformation />
         </Grid>
-        <Grid item xs={6}>
-          <Grid 
-            container
-            direction= 'column'
-            justifyContent='flex-start'
-            alignItems='flex-start'
-          >
-            {/* Alumnos */}
-            <Typography variant='h5'>Alumno 1</Typography>
-            <Typography variant='h5'>Alumno 2</Typography>
-          </Grid>
+        <Grid item xs={8} >
+              <Grid container item xs={12}>
+                {
+                  seccionCompleta.alumnos.map(alumno => (
+                    <Alumno key={alumno.id} alumno={alumno} />
+                  ))
+                }
+            </Grid>
         </Grid>
       </Grid>
       <IconButton
