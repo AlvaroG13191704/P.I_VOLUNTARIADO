@@ -1,24 +1,30 @@
 
 import { Box, Button, Divider, Grid, Tooltip, Typography } from '@mui/material';
-import React from 'react'
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { ActividadesForm } from '../components/ActividadesForm';
 import { Actividades } from '../components/Actividades';
+import { TopBar } from '../layout/TopBar';
+import { Tables } from '../components/Tables';
 export const MateriaPage = () => {
 
     // hook
-    const {name} = useParams();
-    const {materias} = useSelector(state => state.course);
-
-    const materia = materias.find(m => m.materia === name )
     
-    console.log(materia)
+    const {name} = useParams();
+
+    const {materias} = JSON.parse(localStorage.getItem('seccion'))
+
+    const valores = materias.find(m => m.materia === name )
+
+    const {materia, value} = valores
+
+    
+    
 
 
   return (
     <Box sx={{width:'100%', p:3}}>
+        <TopBar />
         <Grid
             container
             direction="row"
@@ -26,6 +32,7 @@ export const MateriaPage = () => {
             alignItems="center"
             rowSpacing={1} 
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            sx={{mt:4}}
         >
             <Grid item xs={4}>
                 <Grid
@@ -35,7 +42,7 @@ export const MateriaPage = () => {
                     alignItems="center"
                 >
                     <Grid item xs = {12} sx={{mb:2}}>
-                        <Typography variant='h2' sx={{p:0.5}} >{materia.materia}</Typography>
+                        <Typography variant='h2' sx={{p:0.5}} >{materia}</Typography>
                         
                         <Grid container sx={{mt:1.3}}>
                         <Grid item container justifyContent="space-evenly" >
@@ -60,16 +67,16 @@ export const MateriaPage = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
                 <Typography variant='h2' sx={{p:0.5}} >Actividades creadas</Typography>
                 <Divider />
-                <Actividades values={materia.value} />
+                <Actividades values={value} />
             </Grid>
             <Grid item xs={4}>
-                <ActividadesForm materia={materia.materia} />
+                <ActividadesForm materia={materia} />
             </Grid>
-            <Grid item xs={6}>
-                4
+            <Grid item xs={8}>
+                <Tables materia={materia} />
             </Grid>
         </Grid>
     </Box>

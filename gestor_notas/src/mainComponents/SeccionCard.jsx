@@ -3,6 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const SeccionCard = ({inputs}) => {
+
+    
   return (
     <Card sx={{minWidth:275,mb:2}} >
         <CardContent>
@@ -10,7 +12,7 @@ export const SeccionCard = ({inputs}) => {
                 Sección: {inputs.seccion}
             </Typography>
             <Typography variant="h5" component="div">
-                Grado: {inputs.grado} Básico
+                Grado: {inputs.grado} Primaria
             </Typography>
             <Typography variant="h6">
                 Profesora: {inputs.profesora}
