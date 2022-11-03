@@ -11,6 +11,7 @@ export const AppRouter = () => {
         <Route path='/seccion/:id' element={<SeccionPage />} />
         <Route path='/seccion/materia/:name' element={<MateriaPage />} />
         <Route path='/seccion/form' element={<AlumnoForm />} />
+        <Route path='*' element={<h1>404: Not Found</h1>} />
     </Routes>
   )
 }
