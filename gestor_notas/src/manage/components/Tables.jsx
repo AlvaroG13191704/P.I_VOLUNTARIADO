@@ -21,23 +21,36 @@ export const Tables = ({ materia }) => {
         const jsx = []
         const zona = []
         let c = 1
+        let total = 0
+        let final = 0
         Object.entries(alumno).forEach(([key,value]) => {
             if (key === 'nombre'){
                 jsx.push(<TableCell align="left" key={key}>{value}</TableCell>)
             }
             if (key === `actividad_${c}_${materia}` ) {
                 console.log(key,value)
-                zona.push(parseInt(value))
-                c++
-                jsx.push(<TableCell align="center" key={key}>{value}</TableCell>)    
+                if (value !== ""){
+                    zona.push(parseInt(value))
+                    c++
+                    jsx.push(<TableCell align="center" key={key}>{value}</TableCell>)  
+                } else {
+                    jsx.push(<TableCell align="center" key={key}>-</TableCell>)
+                    jsx.push(<TableCell align="center" key={key}>-</TableCell>)
+                    jsx.push(<TableCell align="center" key={key}>-</TableCell>)
+                    jsx.push(<TableCell align="center" key={key}>{total}</TableCell>)
+                }
                 
             }
-            if ( key === `final_${materia}` ) {
+            if (key == `actividad_7_${materia}`) {
                 console.log(key,value)
                 console.log(zona)
-                const total = zona.reduce((a,b) => a+b, 0);
-                jsx.push(<TableCell align="center" key='zona'>{total}</TableCell>) 
+                total = zona.reduce((a,b) => a+b, 0);
+                jsx.push(<TableCell align="center" key={value}>{total}</TableCell>) 
+            }
+            if ( key === `final_${materia}` ) {
+                final = parseInt(value)
                 jsx.push(<TableCell align="center" key={key}>{value}</TableCell>)
+                jsx.push(<TableCell align="center" key={key}>{total + final}</TableCell>)
             }
         })
         return jsx
@@ -49,13 +62,13 @@ export const Tables = ({ materia }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Alumno</TableCell>
-                        <TableCell>{actividades.value.actividad_1}</TableCell>
-                        <TableCell>{actividades.value.actividad_2}</TableCell>
-                        <TableCell>{actividades.value.actividad_3}</TableCell>
-                        <TableCell>{actividades.value.actividad_4}</TableCell>
-                        <TableCell>{actividades.value.actividad_5}</TableCell>
-                        <TableCell>{actividades.value.actividad_6}</TableCell>
-                        <TableCell>{actividades.value.actividad_7}</TableCell>
+                        <TableCell>Actividad 1</TableCell>
+                        <TableCell>Actividad 2</TableCell>
+                        <TableCell>Actividad 3</TableCell>
+                        <TableCell>Actividad 4</TableCell>
+                        <TableCell>Actividad 5</TableCell>
+                        <TableCell>Actividad 6</TableCell>
+                        <TableCell>Actividad 7</TableCell>
                         <TableCell>Zona</TableCell>
                         <TableCell>Evaluación</TableCell>
                         <TableCell>Total</TableCell>
